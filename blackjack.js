@@ -25,6 +25,8 @@ let blackjackGame = {
 const YOU = blackjackGame['you'];
 const DEALER = blackjackGame['dealer'];
 const hitSound = new Audio('sounds/swish.m4a');
+const lostSound = new Audio('sounds/aww.mp3');
+const winSound = new Audio('sounds/cash.mp3');
 document.querySelector('#blackjack-hit-btn').addEventListener('click', blackjackHit);
 document.querySelector('#blackjack-stand-btn').addEventListener('click', blackjackStand);
 document.querySelector('#blackjack-deal-btn').addEventListener('click', blackjackDeal);
@@ -80,12 +82,14 @@ function blackjackHit() {
                 document.querySelector('#blackjack-result').style.color = "red";
                 blackjackGame['losses']++;
                 document.querySelector('#losses').textContent = blackjackGame['losses'];
+                lostSound.play();
             }
             else {
                 document.querySelector('#blackjack-result').textContent = "YOU WON!";
                 document.querySelector('#blackjack-result').style.color = "green";
                 blackjackGame['wins']++;
                 document.querySelector('#wins').textContent = blackjackGame['wins'];
+                winSound.play();
             }
         }
         else if (blackjackGame['you']['score'] == blackjackGame['dealer']['score']) {
@@ -104,7 +108,7 @@ function blackjackHit() {
             document.querySelector('#losses').textContent = blackjackGame['losses'];
 
 
-
+            lostSound.play();
 
         }
         else if (blackjackGame[active]['score'] == 21) {
@@ -115,13 +119,14 @@ function blackjackHit() {
                 document.querySelector('#blackjack-result').style.color = "green";
                 blackjackGame['wins']++;
                 document.querySelector('#wins').textContent = blackjackGame['wins'];
-
+                winSound.play();
             }
             else {
                 document.querySelector('#blackjack-result').textContent = "YOU LOST!";
                 document.querySelector('#blackjack-result').style.color = "red";
                 blackjackGame['losses']++;
                 document.querySelector('#losses').textContent = blackjackGame['losses'];
+                lostSound.play();
             }
 
         }
